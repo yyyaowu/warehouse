@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.warehouse.mapper.WarehouseMapper">
+
+    <resultMap id="BaseResultMap" type="com.yao.warehouse.domain.Warehouse">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="warehouseName" column="warehouse_name" jdbcType="VARCHAR"/>
+            <result property="tatalCapacity" column="tatal_capacity" jdbcType="INTEGER"/>
+            <result property="availableCapacity" column="available_capacity" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,warehouse_name,tatal_capacity,
+        available_capacity
+    </sql>
+    <select id="getIdByWarehouseName" resultType="java.lang.Long">
+        select id
+        from warehouse
+        where warehouse_name like concat('%',#{warehouseName,jdbcType=VARCHAR},'%')
+    </select>
+</mapper>
